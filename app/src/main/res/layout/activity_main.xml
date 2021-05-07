@@ -44,7 +44,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_weight="1"
-            android:text="@string/svs"
+            android:text="@string/svsTxt"
             android:textOff="@string/no_svs"
             android:textOn="@string/svs" />
 
@@ -53,7 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/gst"
+            android:text="@string/gstTxt"
             android:textOff="@string/no_gst"
             android:textOn="@string/gst" />
     </LinearLayout>
@@ -72,19 +72,19 @@
         android:inputType="number" />
 
     <RadioGroup
-        android:id="@+id/tax"
+        android:id="@+id/payment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <RadioButton
-            android:id="@+id/cashText"
+            android:id="@+id/cash"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/cash" />
 
         <RadioButton
-            android:id="@+id/paynowText"
+            android:id="@+id/paynow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/paynow" />
