@@ -25,8 +25,8 @@ public class MainActivity extends AppCompatActivity {
 
     double totalAmount = 0.0;
     double tax = 0.0;
+    double taxAmount = 0.0;
     double totalDiscount = 0;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,36 +44,6 @@ public class MainActivity extends AppCompatActivity {
         svs = findViewById(R.id.toggleSVS);
         gst = findViewById(R.id.toggleGST);
 
-//        amount.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                String strAmount = amount.getText().toString();
-//                double dbAmount = Double.parseDouble(strAmount);
-//
-//                String billMsg = "Total Bill: $" + strAmount;
-//                bill.setText(billMsg);
-//
-//            }
-//        });
-
-//        pax.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                String strAmount = amount.getText().toString();
-//                double dbAmount = Double.parseDouble(strAmount);
-//
-//                String strPax = pax.getText().toString();
-//                int intPax = Integer.parseInt(strPax);
-//
-//                totalAmount = dbAmount/intPax;
-//
-//                String billMsg = "Total Bill: $" + totalAmount;
-//                bill.setText(billMsg);
-//
-//            }
-//        });
-
         split.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,11 +54,8 @@ public class MainActivity extends AppCompatActivity {
                 int intPax = Integer.parseInt(strPax);
 
                 String strDiscount = discount.getText().toString();
-                double dbDiscount = Integer.parseInt(strDiscount);
+                double dbDiscount = Double.parseDouble(strDiscount);
 
-                double taxAmount = 0.0;
-
-                totalAmount = dbAmount/intPax;
 
                 if (svs.isChecked()){
                     tax += 0.1;
@@ -97,27 +64,31 @@ public class MainActivity extends AppCompatActivity {
                     tax += 0.07;
                 }
 
-                taxAmount = dbAmount*(1+tax);
-
-                totalAmount = taxAmount/intPax;
+                taxAmount = 1+tax;
 
                 boolean haveDiscount = false;
-
-                if (dbDiscount >=1 && dbDiscount <=100.0) {
+                if (dbDiscount >=0 && dbDiscount <=100.0) {
                     haveDiscount = true;
                 }
-
                 if (haveDiscount = true){
                     totalDiscount = totalAmount*(dbDiscount/100);
                 }
-
-                totalAmount = totalAmount - totalDiscount ;
-
+                totalAmount = (dbAmount - totalDiscount)*taxAmount;
 
                 String billMsg = "Total Bill: $" + totalAmount;
                 bill.setText(billMsg);
 
+                String strPayment = pays.getText().toString();
 
+                int checkedRadioId = rgPayment.getCheckedRadioButtonId();
+                if (checkedRadioId == R.id.cash){
+                    strPayment = "Each Pays: $" + totalAmount/intPax + " in cash";
+                }
+                else {
+                    strPayment = "Each Pays: $" + totalAmount/intPax + " via PayNow to 98297971";
+                }
+
+                pays.setText(strPayment);
             }
         });
 
